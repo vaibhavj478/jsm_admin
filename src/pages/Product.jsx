@@ -486,11 +486,16 @@ const Product = () => {
   const handleCatDelete = (category) => {
     console.log(`Delete category: `, category);
 
+    if (category.products.length) {
+      notify('Category has products', 'error')
+      return 
+    }
     if (category.children.length) {
       notify('Category has children', 'error')
-    } else {
-      dispatch(delCat(category._id));
+      return
     }
+      dispatch(delCat(category._id));
+    
     // Implement your delete logic
   };
 
